@@ -52,13 +52,32 @@ Console.WriteLine("We've got {0} URls to load!",URLS.Count);
 int current_url_number = 1;
 foreach(string URL in URLS)
 {
-    Console.Write("We are on {0} of {1}...\n", current_url_number, URLS.Count);
-    if (DEBUG)
+    var success = false;
+    int error_loop = 0;
+    while (!success)
     {
-        if (current_url_number > 0)
-            break;
+        Console.Write("We are on {0} of {1}...\n", current_url_number, URLS.Count);
+        if (DEBUG)
+        {
+            if (current_url_number > 0)
+                break;
+        }
+        try
+        {
+            downloader.downLoadURL(URL);
+            success = true;
+        }
+        catch
+        {
+            Console.WriteLine("Error on {0}.", current_url_number);
+            error_loop = error_loop + 1;
+            if (error_loop == 3)
+            {
+                Console.WriteLine("Tried three times. Calling it quits on this one.");
+                success = true;
+            }
+        }
     }
-    downloader.downLoadURL(URL);
     Console.Write("Done!\n\n");
     current_url_number++;
 }
