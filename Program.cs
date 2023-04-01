@@ -3,7 +3,7 @@ using ScrapySharp.Network;
 using System;
 using System.Linq;
 
-bool DEBUG = true;
+bool DEBUG = false;
 
 Console.WriteLine("BrithArch Archiver v. 1");
 Console.WriteLine("\n\nUse at your own risk. This softare may not work, may break your computer, get you banned from JiscMail or any number of bad things. Use at your own risk.");
@@ -57,7 +57,7 @@ foreach(string URL in URLS)
             break;
     }
     downloader.downLoadURL(URL);
-    Console.Write("\nDone!\n");
+    Console.Write("Done!\n\n");
     current_url_number++;
 }
 

@@ -70,9 +70,12 @@ namespace BrithArchArchiver
 
         private string extractBodyText(HtmlNodeCollection bodyNodes)
         {
-            foreach(var item in bodyNodes)
+            if (bodyNodes != null)
             {
-                return item.InnerText;
+                foreach (var item in bodyNodes)
+                {
+                    return item.InnerText;
+                }
             }
             return "";
         }
@@ -94,11 +97,15 @@ namespace BrithArchArchiver
             {
                 r = date_element + Clean_String(entry.Subject).Substring(0,6);
             }
+            if (r.Length > 17)
+            {
+                var front = r.Substring(12, 4);
+                r = r.Remove(12, 4);
+                r = front + r;
+            }
             
-            var front = r.Substring(12, 4);
-            r = r.Remove(12, 4);
                       
-            r = front + r;
+            
             return Clean_String(r);
         }
 
@@ -150,7 +157,7 @@ namespace BrithArchArchiver
        private void do_sleep()
         {
             Random random = new Random();
-            int waitValue = random.Next(2000, 6000);
+            int waitValue = random.Next(2000, 4000);
             Console.WriteLine("We'll pause here  for {0} seconds, to avoid getting blocked...", waitValue / 1000);
             Thread.Sleep(waitValue);
         }
