@@ -89,14 +89,18 @@ namespace BrithArchArchiver
             {
                 date_element = date_element + item.ToString();
             }
-            if (entry.Subject.Length < 7)
+            string cleaned_subject = Clean_String(entry.Subject);
+
+            //If the subhect is really long then make it shorter for the filenames...
+            if (cleaned_subject.Length > 5)
             {
-                r = date_element + Clean_String(entry.Subject);
+                r = date_element + cleaned_subject.Substring(0, 4);
             }
             else
             {
-                r = date_element + Clean_String(entry.Subject).Substring(0,4);
+                r = date_element + cleaned_subject;
             }
+            
             //If the string is long enough, take the year from the date and put it at the front of the file for easy sorting. 
             if (r.Length > 17)
             {

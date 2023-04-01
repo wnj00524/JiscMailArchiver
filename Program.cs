@@ -34,6 +34,8 @@ foreach(var entry in yearlyLinks)
 }
 */
 
+checkargs();
+if (DEBUG) Console.WriteLine("Debug enabled.");
 
 List<string> URLS = new List<string>();
 BrithArchArchiver.Downloader downloader = new BrithArchArchiver.Downloader();
@@ -53,7 +55,7 @@ foreach(string URL in URLS)
     Console.Write("We are on {0} of {1}...\n", current_url_number, URLS.Count);
     if (DEBUG)
     {
-        if (current_url_number > 3)
+        if (current_url_number > 0)
             break;
     }
     downloader.downLoadURL(URL);
@@ -63,7 +65,24 @@ foreach(string URL in URLS)
 
 
 
+void checkargs()
+{
+    Console.WriteLine("We've got {0} arguments...", args.Count());
+    //Is debug set? 
+    if (args.Count() > 0)
+    {
+        foreach(var arg in args)
+        {
+            var check_arg = arg.ToLower();
+            if (check_arg == "debug" || arg == "d")
+            {
+                DEBUG = true;
+            }
+        }
+    }
 
+
+}
 
 
 
