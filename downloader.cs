@@ -127,6 +127,8 @@ namespace BrithArchArchiver
             r = r.Replace(".", "");
             r = r.Replace("+", "");
             r = r.Replace("#", "");
+            r = r.Replace("\\", "");
+            r = r.Replace("/", "");
             if (all_to_lower)
                 r = r.ToLower();
             return r;
